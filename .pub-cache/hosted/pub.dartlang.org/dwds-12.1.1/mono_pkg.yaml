@@ -1,0 +1,22 @@
+# See https://pub.dev/packages/mono_repo for details
+stages:
+  - analyzer_and_format:
+    - group:
+      - format
+      - analyze: --fatal-infos .
+      - test: test/build/ensure_version_test.dart
+      sdk: dev
+    - group:
+      - analyze: .
+      sdk: dev
+  - unit_test:
+    - group:
+      - command: Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+      - test:
+      sdk:
+        - dev
+    - test:
+      os: windows
+      sdk:
+        - dev
+
